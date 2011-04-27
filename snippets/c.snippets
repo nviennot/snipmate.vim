@@ -111,3 +111,20 @@ snippet fpr
 # This is kind of convenient
 snippet .
 	[${1}]${2}
+snippet un
+	unsigned
+snippet ts
+	struct task_struct *
+snippet dsp
+	struct scribe_ps *${1:scribe};
+snippet sp
+	struct scribe_ps *${2:scribe} = ${1:current}->scribe;
+snippet dsc
+	struct scribe_context *${1:ctx};
+snippet sc
+	struct scribe_context *${2:ctx} = ${1:scribe}->ctx;
+snippet sl
+	spin_lock(&${1:lock});
+	spin_unlock(&$1);
+snippet se
+	struct scribe_event_${1} *event;
