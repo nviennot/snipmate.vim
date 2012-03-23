@@ -15,8 +15,8 @@ let s:did_snips_mappings = 1
 "ino <silent> <s-tab> <c-r>=BackwardsSnippet()<cr>
 "snor <silent> <s-tab> <esc>i<right><c-r>=BackwardsSnippet()<cr>
 "ino <silent> <c-r><tab> <c-r>=ShowAvailableSnips()<cr>
-ino <silent> <C-p> <c-r>=TriggerSnippet()<cr>
-snor <silent> <C-p> <esc>i<right><c-r>=TriggerSnippet()<cr>
+ino <silent> <C-j> <c-r>=TriggerSnippet()<cr>
+snor <silent> <C-j> <esc>i<right><c-r>=TriggerSnippet()<cr>
 
 
 " maybe there is a better way without polluting registers ?
