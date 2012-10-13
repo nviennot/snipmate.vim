@@ -155,13 +155,16 @@ snippet se
 	struct scribe_event_${1} *event;
 # main()
 snippet procfile
+	#include <linux/seq_file.h>
+	#include <linux/proc_fs.h>
+
 	static int ${1:subsys}_proc_show(struct seq_file *seq, void *offset)
 	{
 		seq_printf(seq, "hello proc\n");
 		return 0;
 	}
 
-	static int ${1:subsys}_proc_open(struct inode *inode, struct file *file)
+	static int $1_proc_open(struct inode *inode, struct file *file)
 	{
 		return single_open(file, $1_proc_show, PDE(inode)->data);
 	}
@@ -170,7 +173,6 @@ snippet procfile
 	{
 		const unsigned int len = ${2:maxinput};
 		char strbuf[len + 1];
-		pid_t new_pid = 0;
 	
 		/* Don't write more than max input length, but please write something */
 		if (count > len || count == 0)
@@ -205,4 +207,4 @@ snippet procfile
 		return 0;
 	}
 	
-	__initcall($1_namespace_init);
+	__initcall($1_proc_init);
