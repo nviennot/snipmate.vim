@@ -153,3 +153,58 @@ snippet sl
 	spin_unlock(&$1);
 snippet se
 	struct scribe_event_${1} *event;
+# main()
+snippet procfile
+	#include <linux/seq_file.h>
+	#include <linux/proc_fs.h>
+
+	static int ${1:subsys}_proc_show(struct seq_file *seq, void *offset)
+	{
+		seq_printf(seq, "hello proc\n");
+		return 0;
+	}
+
+	static int $1_proc_open(struct inode *inode, struct file *file)
+	{
+		return single_open(file, $1_proc_show, PDE(inode)->data);
+	}
+	
+	static ssize_t $1_proc_write(struct file *file, const char __user * buffer, size_t count, loff_t * ppos)
+	{
+		const unsigned int len = ${2:maxinput};
+		char strbuf[len + 1];
+	
+		/* Don't write more than max input length, but please write something */
+		if (count > len || count == 0)
+			return -EFAULT;
+	
+		if (copy_from_user(strbuf, buffer, count))
+			return -EFAULT;
+	
+		strbuf[count] = '\0';
+
+		/* TODO: parse strbuf */
+
+		return count;
+	}
+	
+	static const struct file_operations $1_proc_fileops = {
+		.owner = THIS_MODULE,
+		.open = $1_proc_open,
+		.read = seq_read,
+		.write = $1_proc_write,
+		.llseek = seq_lseek,
+		.release = single_release,
+	};
+	
+	static __init int $1_proc_init(void)
+	{
+		struct proc_dir_entry *entry;
+	
+		entry = proc_create("${3:my_proc_file_name}", 0, NULL, &$1_proc_fileops);
+		if (!entry)
+			return -ENOMEM;
+		return 0;
+	}
+	
+	__initcall($1_proc_init);
