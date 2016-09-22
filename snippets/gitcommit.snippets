@@ -1,14 +1,3 @@
-# DEP-3 (http://dep.debian.net/deps/dep3/) style patch header
-snippet header DEP-3 style header
-	Description: ${1}
-	Origin: ${2}
-	Bug: ${3}
-	Forwarded: ${4}
-	Author: ${5:`g:snips_author`}
-	Reviewed-by: ${6}
-	Last-Update: ${7:`strftime("%Y-%m-%d")`}
-	Applied-Upstream: ${8}
-
 snippet so
 	Signed-off-by: Christoffer Dall <christoffer.dall@linaro.org>
 snippet ack
@@ -17,3 +6,7 @@ snippet rev
 	Reviewed-by: Christoffer Dall <christoffer.dall@linaro.org>
 snippet soc
 	Signed-off-by: Christoffer Dall <cdall@cs.columbia.edu>
+snippet -C
+	-Christoffer
+snippet cherry
+	(cherry picked from commit ${1})
