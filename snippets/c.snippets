@@ -153,7 +153,6 @@ snippet sl
 	spin_unlock(&$1);
 snippet se
 	struct scribe_event_${1} *event;
-# main()
 snippet procfile
 	#include <linux/seq_file.h>
 	#include <linux/proc_fs.h>
@@ -208,3 +207,5 @@ snippet procfile
 	}
 	
 	__initcall($1_proc_init);
+snippet vcpu
+	struct kvm_vcpu *vcpu
